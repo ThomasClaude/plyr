@@ -31,6 +31,7 @@
 
     // Default config
     defaults = {
+        desktop: true,
         enabled:                true,
         debug:                  false,
         autoplay:               false,
@@ -1471,8 +1472,14 @@
                 vimeo.loaded = false;
                 _on(vimeo, 'load', function() { vimeo.loaded = true; });
 
+                var src = 'https://player.vimeo.com/video/' + mediaId + '?player_id=' + id;
+
+                if (defaults.desktop) {
+                  src += '&api=1&badge=0&byline=0&portrait=0&title=0';
+                }
+
                 _setAttributes(vimeo, {
-                    'src':                      'https://player.vimeo.com/video/' + mediaId + '?player_id=' + id + '&api=1&badge=0&byline=0&portrait=0&title=0',
+                    'src':                      src,
                     'id':                       id,
                     'allowfullscreen':          '',
                     'frameborder':              0
