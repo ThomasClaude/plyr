@@ -26,7 +26,7 @@
     /*global YT,$f*/
 
     // Globals
-    var fullscreen, 
+    var fullscreen,
     scroll = { x: 0, y: 0 },
 
     // Default config
@@ -37,8 +37,8 @@
         loop:                   false,
         seekTime:               10,
         volume:                 5,
-        volumeMin:              0, 
-        volumeMax:              10, 
+        volumeMin:              0,
+        volumeMax:              10,
         volumeStep:             1,
         duration:               null,
         displayDuration:        true,
@@ -497,9 +497,9 @@
         }
 
         // Create and dispatch the event
-        var event = new CustomEvent(eventName, { 
+        var event = new CustomEvent(eventName, {
             bubbles:    bubbles,
-            detail:     properties 
+            detail:     properties
         });
 
         // Dispatch the event
@@ -1919,7 +1919,7 @@
                 targetTime = duration;
             }
 
-            // Update seek range and progress 
+            // Update seek range and progress
             _updateSeekDisplay(targetTime);
 
             // Set the current time
@@ -2327,7 +2327,7 @@
             if (!plyr.supported.full) {
                 return;
             }
-            
+
             // Default to 0
             if (typeof value === 'undefined') {
                 value = 0;
@@ -2421,7 +2421,7 @@
             _updateProgress(event);
         }
 
-        // Update seek range and progress 
+        // Update seek range and progress
         function _updateSeekDisplay(time) {
             // Default to 0
             if (typeof time !== 'number') {
@@ -2431,7 +2431,7 @@
             var duration    = _getDuration(),
                 value       = _getPercentage(time, duration);
 
-            // Update progress 
+            // Update progress
             if (plyr.progress && plyr.progress.played) {
                 plyr.progress.played.value = value;
             }
@@ -2542,15 +2542,15 @@
                 }
             }
 
-            // If toggle is false or if we're playing (regardless of toggle), 
-            // then set the timer to hide the controls 
+            // If toggle is false or if we're playing (regardless of toggle),
+            // then set the timer to hide the controls
             if (!show || !plyr.media.paused) {
                 plyr.timers.hover = window.setTimeout(function() {
                     // If the mouse is over the controls (and not entering fullscreen), bail
                     if ((plyr.controls.pressed || plyr.controls.hover) && !isEnterFullscreen) {
                         return;
                     }
-                    
+
                     _toggleClass(plyr.container, config.classes.hideControls, true);
                 }, delay);
             }
@@ -2875,12 +2875,12 @@
                 _on(plyr.container, 'mouseenter mouseleave mousemove touchstart touchend touchcancel touchmove enterfullscreen', _toggleControls);
 
                 // Watch for cursor over controls so they don't hide when trying to interact
-                _on(plyr.controls, 'mouseenter mouseleave', function(event) { 
+                _on(plyr.controls, 'mouseenter mouseleave', function(event) {
                     plyr.controls.hover = event.type === 'mouseenter';
                 });
 
                  // Watch for cursor over controls so they don't hide when trying to interact
-                _on(plyr.controls, 'mousedown mouseup touchstart touchend touchcancel', function(event) { 
+                _on(plyr.controls, 'mousedown mouseup touchstart touchend touchcancel', function(event) {
                     plyr.controls.pressed = _inArray(['mousedown', 'touchstart'], event.type);
                 });
 
@@ -3335,7 +3335,7 @@
 
         return {
             basic:  basic,
-            full:   full
+            full:   true//full
         };
     }
 
@@ -3429,8 +3429,8 @@
                 element.plyr = (Object.keys(instance).length ? instance : false);
 
                 // Callback
-                _triggerEvent(original, 'setup', true, { 
-                    plyr: element.plyr 
+                _triggerEvent(original, 'setup', true, {
+                    plyr: element.plyr
                 });
             }
 
